@@ -1,28 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    
     [SerializeField] private float moveSpeed = 2;
-    
     [SerializeField] private float rotationSpeed = 10;
-    
     [SerializeField] private float gravity = -9.8f;
-    
-    [SerializeField] private float groundCheckDistance;
-    
-    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private float jumpVelocity = 10f;
 
+    [Space(10)]
+    [Header("Ground Check")]
     [SerializeField] private Vector3 groundCheckOffset;
-
-
-    [SerializeField]
-    private float jumpVelocity = 10f;
-
-
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
+
+    public event Action OnJumpEvent;
 
     private Vector2 _moveInput;
     private Vector3 _camForward;
@@ -31,6 +26,24 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private Quaternion _targetRotation;
     private Vector3 _velocity;
+    private bool _isGrounded;
+
+    public bool IsGrounded()
+    {
+        return _isGrounded;
+    }
+
+    public Vector3 GetPlayerVelocity()
+    {
+        return _velocity;
+    }
+
+    // Property
+    public bool _IsGrounded
+    {
+        get => _isGrounded;
+        private set { _isGrounded = value; }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,6 +58,15 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(_velocity * Time.deltaTime);
     }
 
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        if (_isGrounded && _velocity.y < 0)
+        {
+            _velocity.y = -0.2f;
+        }
+    }
+
     public void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector2>();
@@ -52,10 +74,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump()
     {
-        if (IsGrounded())
+        if (_isGrounded)
         {
-            Debug.Log("Jumped");
+            Debug.Log("JUMP");
             _velocity.y = jumpVelocity;
+            OnJumpEvent?.Invoke();
         }
     }
 
@@ -70,40 +93,42 @@ public class PlayerController : MonoBehaviour
 
         _moveDirection = _camRight * _moveInput.x + _camForward * _moveInput.y;
 
-        _targetRotation = Quaternion.LookRotation(_moveDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, rotationSpeed * Time.deltaTime);
+        if (_moveDirection.sqrMagnitude > 0.01f)
+        {
+            _targetRotation = Quaternion.LookRotation(_moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
         //Calculate gravity
-        _velocity = _moveDirection * moveSpeed;
-        _velocity.y += gravity;
+        _velocity = Vector3.up * _velocity.y + _moveDirection * moveSpeed;
+        _velocity.y += gravity * Time.deltaTime;
+
+
+
     }
 
-    private bool IsGrounded()
+    private void CheckGrounded()
     {
-        if(Physics.SphereCast(transform.position + groundCheckOffset, groundCheckRadius, Vector3.down, out RaycastHit hit,groundCheckDistance, groundLayer))
-        {
-            Debug.Log("SphereCast hit");
-            return true;
-        }
-        if (!Physics.SphereCast(transform.position + groundCheckOffset, groundCheckRadius, Vector3.down, out RaycastHit hitTwo, groundCheckDistance, groundLayer))
-        {
-            Debug.Log("not grounded");
-            return false;
-        }
-        else
-        {
-            return false;
-        }
+        _isGrounded = Physics.SphereCast(
+            transform.position + groundCheckOffset,
+            groundCheckRadius,
+            Vector3.down,
+            out RaycastHit hit,
+            groundCheckDistance,
+            groundLayer
+        );
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.purple;
         Gizmos.DrawSphere(transform.position + groundCheckOffset, groundCheckRadius);
-        //Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
-        //Gizmos.DrawCube(transform.position + groundCheckOffset + (Vector3.down * groundCheckDistance)/2, new Vector3(1.5f * groundCheckRadius, groundCheckDistance, 2 * groundCheckRadius));
+        Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
+        Gizmos.DrawCube(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance / 2,
+                    new Vector3(1.5f * groundCheckRadius, groundCheckDistance, 1.5f * groundCheckRadius));
     }
 }
+
 
 
 
