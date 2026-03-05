@@ -10,15 +10,6 @@ public class ChestInteractable : MonoBehaviour, IInteractable
     private Tween _loopTween;
     private Tween _collectTween;
     
-    void OnEnable()
-    {
-
-    }
-
-    void OnDisable()
-    {
-
-    }
 
 
     void Start()
