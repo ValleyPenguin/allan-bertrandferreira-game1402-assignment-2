@@ -9,7 +9,8 @@ public class ChestInteractable : MonoBehaviour, IInteractable
     private int isOpenHash;
     private Tween _loopTween;
     private Tween _collectTween;
-    
+
+    [SerializeField] private PlayerAnimator _playerAnimator;
 
 
     void Start()
@@ -32,6 +33,8 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
+        _playerAnimator.OnOpenedChest();
+
         Debug.Log($"Interacted with {gameObject.name}");
 
         _collectTween = transform.DOScale(0, .5f).SetEase(Ease.InBack).OnComplete(() =>

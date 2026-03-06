@@ -38,5 +38,10 @@ public class PlayerAnimator : MonoBehaviour
     {
         anim.SetTrigger("Jump");
     }
+
+    public void OnOpenedChest()
+    {
+        anim.SetTrigger("JustOpenedChest");
+    }
 }
 
