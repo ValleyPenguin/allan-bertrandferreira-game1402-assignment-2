@@ -36,6 +36,7 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
         _collectTween = transform.DOScale(0, .5f).SetEase(Ease.InBack).OnComplete(() =>
         {
+            transform.DOKill();
             Destroy(gameObject);
         });
 
