@@ -678,7 +678,7 @@ MonoBehaviour:
   moveSpeed: 8
   rotationSpeed: 10
   gravity: -20
-  jumpVelocity: 20
+  jumpVelocity: 12
   groundCheckOffset: {x: 0, y: 0.46, z: 0}
   groundCheckDistance: 0.11
   groundCheckRadius: 0.47
@@ -1467,7 +1467,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159986446}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
