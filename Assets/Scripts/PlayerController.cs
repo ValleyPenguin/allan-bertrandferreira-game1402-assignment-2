@@ -119,14 +119,14 @@ public class PlayerController : MonoBehaviour
         );
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Gizmos.color = Color.purple;
         Gizmos.DrawSphere(transform.position + groundCheckOffset, groundCheckRadius);
         Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
         Gizmos.DrawCube(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance / 2,
                     new Vector3(1.5f * groundCheckRadius, groundCheckDistance, 1.5f * groundCheckRadius));
-    }
+    }*/
 }
 
 
