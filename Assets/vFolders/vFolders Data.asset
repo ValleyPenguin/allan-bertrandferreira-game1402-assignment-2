@@ -21,14 +21,9 @@ MonoBehaviour:
     - 4c014e8e383248a4da25b262a471edb4
     - c2f666cf7dd14bc41b1388a3fb6418b1
     - c9604e12fcc8edf499181023c3952a61
-    - 7fcf56cfb56cd2e46a53b4ef154e873a
-    - 72589719770b04ead999af902c0459f8
-    - ff26552afaf99fe4ca0e942478af0eec
-    - f54d1bd14bd3ca042bd867b519fee8cc
-    - 109ccfb08b9fd4bf5a9d8deee2ace2ed
-    - 48308b69b38222a468630d8082f41364
     - b6b2bfe9d312c1b4bbf5563516c36539
     - 45fb18fd3feb1024ba4eafbab81594e8
+    - c643f3cdf5f1e684fb139b386754dd43
     values:
     - iconNameOrGuid: cs Script Icon
       colorIndex: 8
@@ -67,27 +62,7 @@ MonoBehaviour:
       isIconRecursive: 0
       isColorRecursive: 0
     - iconNameOrGuid: 
-      colorIndex: 2
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 2
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 2
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 2
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 2
-      isIconRecursive: 0
-      isColorRecursive: 0
-    - iconNameOrGuid: 
-      colorIndex: 2
+      colorIndex: 3
       isIconRecursive: 0
       isColorRecursive: 0
   bookmarks:

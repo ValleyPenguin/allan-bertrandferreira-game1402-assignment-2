@@ -34,7 +34,7 @@ public class CameraSwitcher : MonoBehaviour
             break;
 
             default:
-                //nothing to do here
+                exploreCamera.Prioritize();
             break;
 
         }

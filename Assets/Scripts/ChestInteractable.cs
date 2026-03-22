@@ -19,7 +19,8 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
         isOpenHash = Animator.StringToHash("IsOpen");
 
-        transform.DOScale(1.1f, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        //to make the chests keep growing and shrinking
+        //transform.DOScale(1.1f, 1.2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
     }
 
     public void OnHoverIn()
@@ -36,6 +37,8 @@ public class ChestInteractable : MonoBehaviour, IInteractable
         _playerAnimator.OnOpenedChest();
 
         Debug.Log($"Interacted with {gameObject.name}");
+
+        Toast.Instance.HideToast();
 
         _collectTween = transform.DOScale(0, .5f).SetEase(Ease.InBack).OnComplete(() =>
         {
@@ -55,7 +58,6 @@ public class ChestInteractable : MonoBehaviour, IInteractable
         Debug.Log("Interactor out!");
         anim?.SetBool(isOpenHash, false);
 
-        // TODO - Hide UI
         Toast.Instance.HideToast();
     }
 }

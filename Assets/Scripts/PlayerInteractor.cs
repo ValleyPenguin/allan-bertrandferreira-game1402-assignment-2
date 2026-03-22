@@ -17,6 +17,7 @@ public class PlayerInteractor : MonoBehaviour
 
     void OnDisable()
     {
+        interactionInput.Disable();
         interactionInput.performed -= Interact;
     }
 
@@ -42,5 +43,6 @@ public class PlayerInteractor : MonoBehaviour
     {
         Debug.Log("Interact");
         _interactable?.OnInteract();
+        _interactable = null;
     }
 }

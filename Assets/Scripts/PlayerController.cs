@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,6 +44,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxAimHeight;
     [SerializeField] private float minAimHeight;
 
+    [SerializeField] private float maxAimAngle;
+    [SerializeField] private float minAimAngle;
+    
+
     [SerializeField] private Vector3 _defaultAimTrackerPosition;
 
     [SerializeField] private Vector3 _tempAimTrackerPosition;
@@ -50,6 +55,17 @@ public class PlayerController : MonoBehaviour
     private PlayerState _currentState;
 
     public event Action<PlayerState> OnStateUpdated;
+
+    private float _aimAngleUpDown;
+
+    [SerializeField] private Transform playerSpineBone;
+
+    [SerializeField] private Transform camTransform;
+
+    private Vector3 _directionToAimTarget;
+
+    private Quaternion _targetPlayerDirection;
+
 
 
     public bool IsGrounded()
@@ -75,25 +91,46 @@ public class PlayerController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _currentState = PlayerState.EXPLORE;    
     
-        OnStateUpdated?.Invoke(_currentState);
-        _defaultAimTrackerPosition = aimTrack.localPosition;
+        //OnStateUpdated?.Invoke(_currentState);
+        //_defaultAimTrackerPosition = aimTrack.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_currentState == PlayerState.EXPLORE)
+        _characterController.Move(_velocity * Time.deltaTime);
+
+        if (_currentState == PlayerState.EXPLORE)
         {
+            ShowHideCrosshair.Instance.HideCrosshair();
             CalculateMovementExplore();
-            aimTrack.localPosition = _defaultAimTrackerPosition;
         }
 
         else if (_currentState == PlayerState.AIM)
         {
+            ShowHideCrosshair.Instance.ShowCrosshair();
             CalculateMovementAim();
-            UpdateAimTrack();
+
+            //_directionToAimTarget = aimTrack.transform.position - transform.position;
+
+            //_directionToAimTarget.y = 0f;
+
+            //_directionToAimTarget.Normalize();
+
+            _camForward = playerCamera.transform.forward;
+            _camForward.y = 0f;
+            
+            
+            
+            transform.Rotate(Vector3.up, _lookInput.x * rotationSpeedAimed * Time.deltaTime);
+            
+            
+            //_camForward.Normalize();
+
+            //_targetRotation = Quaternion.LookRotation(_camForward);
+
+            //transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, rotationSpeedAimed * Time.deltaTime);
         }
-            _characterController.Move(_velocity * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -103,6 +140,27 @@ public class PlayerController : MonoBehaviour
         {
             _velocity.y = -0.2f;
         }
+    }
+
+    //late update because im messing with the spine of the player, don't want animations to break
+    private void LateUpdate()
+    {
+
+        //if (_currentState == PlayerState.EXPLORE)
+        //{
+        //    aimTrack.localPosition = _defaultAimTrackerPosition;
+        //}
+
+        if (_currentState == PlayerState.AIM)
+        {
+            UpdateAimTrack();
+        }
+
+        //playerSpineBone.localRotation = Quaternion.Euler(65f, 0f, 0f);
+        //if (_currentState == PlayerState.AIM)
+        //{
+        //    playerSpineBone.localRotation = Quaternion.Euler(_lookInput.y * -1f, 0f, 0f);
+        //}
     }
 
     public void OnMove(InputValue value)
@@ -128,7 +186,7 @@ public class PlayerController : MonoBehaviour
     public void OnAim(InputValue value)
     {
         _currentState = value.isPressed ? PlayerState.AIM : PlayerState.EXPLORE;
-        
+
 
         if(_currentState == PlayerState.AIM)
         {
@@ -136,6 +194,7 @@ public class PlayerController : MonoBehaviour
             _camForward.y = 0f;
             _camForward.Normalize();
             transform.rotation = Quaternion.LookRotation(_camForward);
+            _aimAngleUpDown = 0f;
         }
         OnStateUpdated?.Invoke(_currentState);
     }
@@ -160,29 +219,36 @@ public class PlayerController : MonoBehaviour
         //Calculate gravity
         _velocity = Vector3.up * _velocity.y + _moveDirection * moveSpeed;
         _velocity.y += gravity * Time.deltaTime;
-
-
-
     }
 
     private void CalculateMovementAim()
     {
         //rotate the player around the Y axis based on horizontal input (x)
-        transform.Rotate(Vector2.up, rotationSpeed * _lookInput.x * Time.deltaTime);
+        //transform.Rotate(Vector2.up, rotationSpeed * _lookInput.x); //* Time.deltaTime);
 
         // WASD relates to where the player is currently facing
         // Left/Right goes sideways, forward/back moves along the players facing direction
         // scalar multiplied by vector is faster than vector multiplied by scalar, order matters
+        _moveDirection = _moveInput.x * transform.right + _moveInput.y * transform.forward;
         _velocity = _velocity.y * Vector3.up + moveSpeedAimed * _moveDirection;
-        _moveDirection = _moveInput.x * transform.right  + _moveInput.y * transform.forward ;
+        _velocity.y += gravity * Time.deltaTime;
+        
     }
 
     private void UpdateAimTrack()
     {
-        _tempAimTrackerPosition = aimTrack.localPosition;
-        _tempAimTrackerPosition.y += _lookInput.y * rotationSpeedAimed * Time.deltaTime;
-        _tempAimTrackerPosition.y = Mathf.Clamp(_tempAimTrackerPosition.y, minAimHeight, maxAimHeight);
-        aimTrack.localPosition = _tempAimTrackerPosition;
+        _aimAngleUpDown -= _lookInput.y * rotationSpeedAimed * Time.deltaTime;
+        _aimAngleUpDown = Mathf.Clamp(_aimAngleUpDown, minAimAngle, maxAimAngle);
+        playerSpineBone.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
+        playerCamera.transform.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
+        
+        
+        //camTransform.Rotate(new Vector3(0f, _aimAngleUpDown, 0f));
+
+        //_tempAimTrackerPosition = aimTrack.localPosition;
+        //_tempAimTrackerPosition.y += _lookInput.y * rotationSpeedAimed * Time.deltaTime;
+        //_tempAimTrackerPosition.y = Mathf.Clamp(_tempAimTrackerPosition.y, minAimHeight, maxAimHeight);
+        //aimTrack.localPosition = _tempAimTrackerPosition;
     }
 
     private void CheckGrounded()
@@ -206,7 +272,3 @@ public class PlayerController : MonoBehaviour
                     new Vector3(1.5f * groundCheckRadius, groundCheckDistance, 1.5f * groundCheckRadius));
     }*/
 }
-
-
-
-
