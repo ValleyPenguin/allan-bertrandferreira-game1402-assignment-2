@@ -10,6 +10,10 @@ public class ChestInteractable : MonoBehaviour, IInteractable
     private Tween _loopTween;
     private Tween _collectTween;
 
+    [SerializeField] private GameObject[] powerUps;
+
+    private GameObject _chosenPowerUp;
+
     [SerializeField] private PlayerAnimator _playerAnimator;
 
 
@@ -46,6 +50,8 @@ public class ChestInteractable : MonoBehaviour, IInteractable
             Destroy(gameObject);
         });
 
+        //spawn the random power up a little bit above 
+        Instantiate(ChooseRandomPowerUp(), gameObject.transform.position + Vector3.up * 1.25f, Quaternion.identity);
     }
 
     void OnDestroy()
@@ -59,5 +65,15 @@ public class ChestInteractable : MonoBehaviour, IInteractable
         anim?.SetBool(isOpenHash, false);
 
         Toast.Instance.HideToast();
+    }
+
+
+    public GameObject ChooseRandomPowerUp()
+    {
+        int randomNumber = Random.Range(0, 3);
+        
+        _chosenPowerUp = powerUps[randomNumber];
+
+        return _chosenPowerUp;
     }
 }
