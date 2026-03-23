@@ -51,7 +51,7 @@ public class ChestInteractable : MonoBehaviour, IInteractable
         });
 
         //spawn the random power up a little bit above 
-        Instantiate(ChooseRandomPowerUp(), gameObject.transform.position + Vector3.up * 1.25f, Quaternion.identity);
+        Instantiate(ChooseRandomPowerUp(), gameObject.transform.position + Vector3.up * 1.42f, Quaternion.identity);
     }
 
     void OnDestroy()
