@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,14 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] private Transform aimTrack;
 
+    [SerializeField] private ParticleSystem muzzleFlash;
+
+    [SerializeField] private Camera cam;
+
+    private AudioSource audioSource;
+
+    private Vector3 rayHitPosition;
+
     private GameObject bullet;
 
     private Vector3 _shootDirection;
@@ -20,9 +29,15 @@ public class Shooter : MonoBehaviour
 
     private PlayerController _playerController;
 
-    private void Awake()
+    
+    void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+    }
+    
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -31,7 +46,7 @@ public class Shooter : MonoBehaviour
         shootInput.performed += Shoot;
 
 
-        _playerController.OnStateUpdated += (state) => _currentState = state;
+        //_playerController.OnStateUpdated += (state) => _currentState = state;
         _playerController.OnStateUpdated += StateUpdate;
 
     }
@@ -47,14 +62,32 @@ public class Shooter : MonoBehaviour
     {
         shootInput.Disable();
         shootInput.performed -= Shoot;
+        _playerController.OnStateUpdated -= StateUpdate;
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
         if (_currentState != PlayerState.AIM) return;
 
+        muzzleFlash.Play();
+        audioSource.pitch = Random.Range(0.75f, 1.25f);
+        
+        audioSource.Play();
+
+        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1000f))
+        {
+            rayHitPosition = hit.point;
+        }
+        else
+        {
+            rayHitPosition = ray.GetPoint(50f);
+        }
+
         //calculate the direction
-        _shootDirection = aimTrack.position - shootPoint.position;
+        _shootDirection = rayHitPosition - shootPoint.position;
         _shootDirection.Normalize();
 
         //create a new arrow OLD: shootPoint.rotation
