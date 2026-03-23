@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private float moveSpeed = 2;
+    public float moveSpeed;
     [SerializeField] private float rotationSpeed = 10;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float jumpVelocity = 10f;
@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
 
     private Quaternion _initialSpineLocalRotation;
 
+    private SpeedPowerUp _speedPowerUp;
+
     public bool IsGrounded()
     {
         return _isGrounded;
@@ -100,6 +102,8 @@ public class PlayerController : MonoBehaviour
         _currentState = PlayerState.EXPLORE;
         _cameraInitialLocalRotation = playerCamera.transform.localRotation;
         _initialSpineLocalRotation = playerSpineBone.localRotation;
+
+        _speedPowerUp = new SpeedPowerUp();
 
         //OnStateUpdated?.Invoke(_currentState);
         //_defaultAimTrackerPosition = aimTrack.localPosition;
@@ -243,8 +247,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        //Calculate gravity
         _velocity = Vector3.up * _velocity.y + _moveDirection * moveSpeed;
+        //Calculate gravity
         _velocity.y += gravity * Time.deltaTime;
     }
 
