@@ -2436,7 +2436,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.8879663, g: 0.7971698, b: 1, a: 1}
-  m_Intensity: 1.75
+  m_Intensity: 1.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -11256,6 +11256,10 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 7321490323091799096, guid: 1df87930ddf8e014b897f88b696a8dee, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321490323091799096, guid: 1df87930ddf8e014b897f88b696a8dee, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []

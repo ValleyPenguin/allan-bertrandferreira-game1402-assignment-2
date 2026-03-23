@@ -21,7 +21,7 @@ public class PlayerInteractor : MonoBehaviour
         interactionInput.performed -= Interact;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         _tempInteractable = other.GetComponent<IInteractable>();
 
