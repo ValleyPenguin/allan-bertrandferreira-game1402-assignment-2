@@ -5,6 +5,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Animator anim;
 
+
     Vector3 _playerVelocity;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +28,7 @@ public class PlayerAnimator : MonoBehaviour
     private void OnEnable()
     {
         playerController.OnJumpEvent += OnJump;
+        playerController.OnStateUpdated += OnStateChange;
     }
 
     private void OnDisable()
@@ -42,6 +44,18 @@ public class PlayerAnimator : MonoBehaviour
     public void OnOpenedChest()
     {
         anim.SetTrigger("JustOpenedChest");
+    }
+    
+    private void OnStateChange(PlayerState playerState)
+    {
+        if (playerState == PlayerState.AIM)
+        {
+            anim.SetBool("IsAiming", true);
+        }
+        else
+        {
+            anim.SetBool("IsAiming", false);
+        }
     }
 }
 

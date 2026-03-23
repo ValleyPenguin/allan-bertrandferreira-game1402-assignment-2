@@ -1,9 +1,21 @@
 fileFormatVersion: 2
 guid: 0de32c706365ae946befeddfc6ff5134
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322992
+  packageName: Low Poly Pistol Weapon Pack 3
+  packageVersion: 1.0
+  assetPath: Assets/Low Poly Pistol Weapon Pack 3/Models/Weapons/Pistol_O.fbx
+  uploadId: 774705
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Modern Weapon Pack Vol.01
+    second: {fileID: 2100000, guid: 85bdefc78e18c254ea93fc987de224d8, type: 2}
   materials:
     materialImportMode: 0
     materialName: 0
@@ -56,6 +68,9 @@ ModelImporter:
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -105,10 +120,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 322992
-  packageName: Low Poly Pistol Weapon Pack 3
-  packageVersion: 1.0
-  assetPath: Assets/Low Poly Pistol Weapon Pack 3/Models/Weapons/Pistol_O.fbx
-  uploadId: 774705

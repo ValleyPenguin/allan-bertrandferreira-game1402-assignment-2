@@ -66,7 +66,15 @@ public class PlayerController : MonoBehaviour
 
     private Quaternion _targetPlayerDirection;
 
+    private Quaternion _cameraInitialLocalRotation;
 
+    [SerializeField] private Transform camPivot;
+
+    [SerializeField] private Transform rootBoneTransform;
+
+    private float _aimAngleLeftRight;
+
+    private Quaternion _initialSpineLocalRotation;
 
     public bool IsGrounded()
     {
@@ -89,8 +97,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _currentState = PlayerState.EXPLORE;    
-    
+        _currentState = PlayerState.EXPLORE;
+        _cameraInitialLocalRotation = playerCamera.transform.localRotation;
+        _initialSpineLocalRotation = playerSpineBone.localRotation;
+
         //OnStateUpdated?.Invoke(_currentState);
         //_defaultAimTrackerPosition = aimTrack.localPosition;
     }
@@ -99,7 +109,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _characterController.Move(_velocity * Time.deltaTime);
-
+        
         if (_currentState == PlayerState.EXPLORE)
         {
             ShowHideCrosshair.Instance.HideCrosshair();
@@ -108,28 +118,38 @@ public class PlayerController : MonoBehaviour
 
         else if (_currentState == PlayerState.AIM)
         {
+
+            _aimAngleLeftRight += _lookInput.x * rotationSpeedAimed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0f, _aimAngleLeftRight, 0f);
+
+
             ShowHideCrosshair.Instance.ShowCrosshair();
             CalculateMovementAim();
 
-            //_directionToAimTarget = aimTrack.transform.position - transform.position;
-
-            //_directionToAimTarget.y = 0f;
-
-            //_directionToAimTarget.Normalize();
-
             _camForward = playerCamera.transform.forward;
             _camForward.y = 0f;
-            
-            
-            
-            transform.Rotate(Vector3.up, _lookInput.x * rotationSpeedAimed * Time.deltaTime);
-            
-            
-            //_camForward.Normalize();
 
-            //_targetRotation = Quaternion.LookRotation(_camForward);
 
-            //transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, rotationSpeedAimed * Time.deltaTime);
+
+
+            //all of this to get the player to look at the exact center of the screen
+            //where the crosshair is, so that it actually looks like the bullets are going to the correct place
+            //Ray aimRay = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+            //Vector3 worldAimPoint = aimRay.GetPoint(1000f);
+
+
+          
+            //Vector3 dirToAimPoint = worldAimPoint - transform.position;
+            //dirToAimPoint.y = 0f;
+
+            //transform.rotation = Quaternion.LookRotation(dirToAimPoint);
+
+            //camPivot.Rotate(0f, _lookInput.x * rotationSpeedAimed * Time.deltaTime, 0f, Space.World);
+            
+            //rootBoneTransform.rotation = Quaternion.LookRotation(aimTrackDirection);
+
+            //transform.Rotate(Vector3.up, _lookInput.x * rotationSpeedAimed * Time.deltaTime);
+
         }
     }
 
@@ -187,14 +207,21 @@ public class PlayerController : MonoBehaviour
     {
         _currentState = value.isPressed ? PlayerState.AIM : PlayerState.EXPLORE;
 
-
         if(_currentState == PlayerState.AIM)
         {
             _camForward = playerCamera.transform.forward;
             _camForward.y = 0f;
             _camForward.Normalize();
+
             transform.rotation = Quaternion.LookRotation(_camForward);
-            _aimAngleUpDown = 0f;
+
+            _aimAngleLeftRight = transform.eulerAngles.y;
+
+            _aimAngleUpDown = playerCamera.transform.eulerAngles.x;
+            if (_aimAngleUpDown > 180f)
+            {
+                _aimAngleUpDown -= 360f;
+            }
         }
         OnStateUpdated?.Invoke(_currentState);
     }
@@ -239,16 +266,16 @@ public class PlayerController : MonoBehaviour
     {
         _aimAngleUpDown -= _lookInput.y * rotationSpeedAimed * Time.deltaTime;
         _aimAngleUpDown = Mathf.Clamp(_aimAngleUpDown, minAimAngle, maxAimAngle);
-        playerSpineBone.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
-        playerCamera.transform.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
-        
-        
-        //camTransform.Rotate(new Vector3(0f, _aimAngleUpDown, 0f));
 
-        //_tempAimTrackerPosition = aimTrack.localPosition;
-        //_tempAimTrackerPosition.y += _lookInput.y * rotationSpeedAimed * Time.deltaTime;
-        //_tempAimTrackerPosition.y = Mathf.Clamp(_tempAimTrackerPosition.y, minAimHeight, maxAimHeight);
-        //aimTrack.localPosition = _tempAimTrackerPosition;
+
+        camPivot.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f); //Quaternion.Euler(0f, _aimAngleLeftRight, 0f) * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
+        playerSpineBone.localRotation = _initialSpineLocalRotation * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
+
+        
+
+        //Vector3 position = aimTrack.localPosition;
+        //position.y = _aimAngleUpDown * 0.01f;
+        //aimTrack.localPosition = position;
     }
 
     private void CheckGrounded()
@@ -262,13 +289,4 @@ public class PlayerController : MonoBehaviour
             groundLayer
         );
     }
-
-    /*void OnDrawGizmos()
-    {
-        Gizmos.color = Color.purple;
-        Gizmos.DrawSphere(transform.position + groundCheckOffset, groundCheckRadius);
-        Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
-        Gizmos.DrawCube(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance / 2,
-                    new Vector3(1.5f * groundCheckRadius, groundCheckDistance, 1.5f * groundCheckRadius));
-    }*/
 }

@@ -7,13 +7,14 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] private Transform shootPoint;
 
-    [SerializeField] private GameObject shootObject;
+    [SerializeField] private GameObject bulletPrefab;
 
     [SerializeField] private float shootForce;
 
     [SerializeField] private Transform aimTrack;
 
-    private GameObject _arrow;
+    private GameObject bullet;
+
     private Vector3 _shootDirection;
     private PlayerState _currentState;
 
@@ -57,10 +58,10 @@ public class Shooter : MonoBehaviour
         _shootDirection.Normalize();
 
         //create a new arrow OLD: shootPoint.rotation
-        _arrow = Instantiate(shootObject, shootPoint.position, Quaternion.LookRotation(_shootDirection));
+        bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.LookRotation(_shootDirection));
 
         //apply a force
-        _arrow.GetComponent<Rigidbody>().AddForce(shootForce * _shootDirection, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(shootForce * _shootDirection, ForceMode.Impulse);
     }
 }
 
