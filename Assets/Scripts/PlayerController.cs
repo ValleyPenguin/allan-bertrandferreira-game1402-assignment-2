@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     [SerializeField] private float rotationSpeed = 10;
     [SerializeField] private float gravity = -9.8f;
-    [SerializeField] private float jumpVelocity = 10f;
+    public float jumpVelocity = 10f;
 
     [Space(10)]
     [Header("Ground Check")]

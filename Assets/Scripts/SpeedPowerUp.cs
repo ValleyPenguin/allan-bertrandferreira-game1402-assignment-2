@@ -16,9 +16,9 @@ public class SpeedPowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerController playerController = GetComponent<PlayerController>();
+            PlayerController playerController = other.GetComponent<PlayerController>();
 
-            transform.DOScale(0, .5f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
+            transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 playerController.moveSpeed += speedBoostUpgradeStrength;
                 transform.DOKill();  
