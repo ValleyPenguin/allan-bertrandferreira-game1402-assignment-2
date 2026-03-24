@@ -8,7 +8,7 @@ public class JumpPowerUp : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.DOScale(.5f, .5f).From(0f).SetEase(Ease.Linear);
+        transform.DOScale(.5f, .75f).From(0f).SetEase(Ease.Linear);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,10 +19,14 @@ public class JumpPowerUp : MonoBehaviour
 
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
+                Toast.Instance.ShowToast("Upgraded Player Jump!");
                 playerController.jumpVelocity += jumpBoostUpgradeStrength;
                 transform.DOKill();
+                Toast.Instance.HideToastWithDelay(1.5f);
                 Destroy(gameObject);
             });
         }
     }
+
+
 }

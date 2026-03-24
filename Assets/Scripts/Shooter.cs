@@ -29,7 +29,9 @@ public class Shooter : MonoBehaviour
 
     private PlayerController _playerController;
 
-    
+    [SerializeField] private LayerMask hitLayers;
+
+
     void Awake()
     {
         _playerController = GetComponent<PlayerController>();
@@ -77,7 +79,7 @@ public class Shooter : MonoBehaviour
         Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1000f))
+        if (Physics.Raycast(ray, out hit, 1000f, hitLayers))
         {
             rayHitPosition = hit.point;
         }

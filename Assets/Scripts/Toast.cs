@@ -33,4 +33,9 @@ public class Toast : MonoBehaviour
     {
         toastUI.SetActive(false);
     }
+
+    public void HideToastWithDelay(float delay)
+    {
+        Invoke("HideToast", delay);
+    }
 }

@@ -61,9 +61,9 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     public void OnHoverOff()
     {
+        anim?.SetBool(isOpenHash, false);
         Debug.Log("Interactor out!");
         Toast.Instance.HideToast();
-        anim?.SetBool(isOpenHash, false);
     }
 
 

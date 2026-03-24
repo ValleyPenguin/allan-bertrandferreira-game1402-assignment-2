@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class SpeedPowerUp : MonoBehaviour
 {
-    public float speedBoost = 1f;
-
     [SerializeField] private float speedBoostUpgradeStrength;
 
     private void OnEnable()
     {
-        transform.DOScale(.5f, .5f).From(0f).SetEase(Ease.Linear);
+        transform.DOScale(.5f, .75f).From(0f).SetEase(Ease.Linear);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,10 +16,13 @@ public class SpeedPowerUp : MonoBehaviour
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
 
+            
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
+                Toast.Instance.ShowToast("Upgraded Player Speed!");
                 playerController.moveSpeed += speedBoostUpgradeStrength;
-                transform.DOKill();  
+                transform.DOKill();
+                Toast.Instance.HideToastWithDelay(1.5f);
                 Destroy(gameObject);
             });
         }

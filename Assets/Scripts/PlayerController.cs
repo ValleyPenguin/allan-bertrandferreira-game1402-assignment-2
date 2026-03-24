@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
 
     private SpeedPowerUp _speedPowerUp;
 
+    public Transform playerTransform;
+
     public bool IsGrounded()
     {
         return _isGrounded;
