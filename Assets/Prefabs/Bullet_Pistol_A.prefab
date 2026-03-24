@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 2237147367675108774}
   - component: {fileID: 7863481110992837104}
   - component: {fileID: 1278613157909775591}
+  - component: {fileID: 1828355545111957632}
   m_Layer: 0
   m_Name: Bullet_Pistol_A
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,6 +253,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f8a8ab737674343b17515665bd7a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletDestroy
+--- !u!65 &1828355545111957632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843123081825610971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011574433, y: 0.013365004, z: 0.05}
+  m_Center: {x: 0, y: -9.313226e-10, z: 0}
 --- !u!1 &7819988091446765530
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class JumpPowerUp : MonoBehaviour
 
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
-                Toast.Instance.ShowToast("Upgraded Player Jump!");
+                Toast.Instance.ShowToast("Upgraded Player Jump by: " + jumpBoostUpgradeStrength + "!");
                 playerController.jumpVelocity += jumpBoostUpgradeStrength;
                 transform.DOKill();
                 Toast.Instance.HideToastWithDelay(1.5f);

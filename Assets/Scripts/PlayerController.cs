@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController _characterController;
     private Quaternion _targetRotation;
     private Vector3 _velocity;
-    private bool _isGrounded;
+    public bool _isGrounded;
 
     
     [SerializeField] private float moveSpeedAimed = 2f;
@@ -76,9 +76,11 @@ public class PlayerController : MonoBehaviour
 
     private Quaternion _initialSpineLocalRotation;
 
-    private SpeedPowerUp _speedPowerUp;
+    //private SpeedPowerUp _speedPowerUp;
 
     public Transform playerTransform;
+
+    [SerializeField] private Transform playerCapsule;
 
     public bool IsGrounded()
     {
@@ -90,7 +92,7 @@ public class PlayerController : MonoBehaviour
         return _velocity;
     }
 
-    // Property
+
     public bool _IsGrounded
     {
         get => _isGrounded;
@@ -105,15 +107,13 @@ public class PlayerController : MonoBehaviour
         _cameraInitialLocalRotation = playerCamera.transform.localRotation;
         _initialSpineLocalRotation = playerSpineBone.localRotation;
 
-        _speedPowerUp = new SpeedPowerUp();
-
-        //OnStateUpdated?.Invoke(_currentState);
-        //_defaultAimTrackerPosition = aimTrack.localPosition;
+        //_speedPowerUp = new SpeedPowerUp();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckGrounded();
         _characterController.Move(_velocity * Time.deltaTime);
         
         if (_currentState == PlayerState.EXPLORE)
@@ -134,34 +134,12 @@ public class PlayerController : MonoBehaviour
 
             _camForward = playerCamera.transform.forward;
             _camForward.y = 0f;
-
-
-
-
-            //all of this to get the player to look at the exact center of the screen
-            //where the crosshair is, so that it actually looks like the bullets are going to the correct place
-            //Ray aimRay = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-            //Vector3 worldAimPoint = aimRay.GetPoint(1000f);
-
-
-          
-            //Vector3 dirToAimPoint = worldAimPoint - transform.position;
-            //dirToAimPoint.y = 0f;
-
-            //transform.rotation = Quaternion.LookRotation(dirToAimPoint);
-
-            //camPivot.Rotate(0f, _lookInput.x * rotationSpeedAimed * Time.deltaTime, 0f, Space.World);
-            
-            //rootBoneTransform.rotation = Quaternion.LookRotation(aimTrackDirection);
-
-            //transform.Rotate(Vector3.up, _lookInput.x * rotationSpeedAimed * Time.deltaTime);
-
         }
     }
 
     private void FixedUpdate()
     {
-        CheckGrounded();
+        
         if (_isGrounded && _velocity.y < 0)
         {
             _velocity.y = -0.2f;
@@ -171,22 +149,10 @@ public class PlayerController : MonoBehaviour
     //late update because im messing with the spine of the player, don't want animations to break
     private void LateUpdate()
     {
-
-        //if (_currentState == PlayerState.EXPLORE)
-        //{
-        //    aimTrack.localPosition = _defaultAimTrackerPosition;
-        //}
-
         if (_currentState == PlayerState.AIM)
         {
             UpdateAimTrack();
         }
-
-        //playerSpineBone.localRotation = Quaternion.Euler(65f, 0f, 0f);
-        //if (_currentState == PlayerState.AIM)
-        //{
-        //    playerSpineBone.localRotation = Quaternion.Euler(_lookInput.y * -1f, 0f, 0f);
-        //}
     }
 
     public void OnMove(InputValue value)
@@ -224,6 +190,8 @@ public class PlayerController : MonoBehaviour
             _aimAngleLeftRight = transform.eulerAngles.y;
 
             _aimAngleUpDown = playerCamera.transform.eulerAngles.x;
+            
+
             if (_aimAngleUpDown > 180f)
             {
                 _aimAngleUpDown -= 360f;
@@ -256,9 +224,6 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateMovementAim()
     {
-        //rotate the player around the Y axis based on horizontal input (x)
-        //transform.Rotate(Vector2.up, rotationSpeed * _lookInput.x); //* Time.deltaTime);
-
         // WASD relates to where the player is currently facing
         // Left/Right goes sideways, forward/back moves along the players facing direction
         // scalar multiplied by vector is faster than vector multiplied by scalar, order matters
@@ -276,12 +241,6 @@ public class PlayerController : MonoBehaviour
 
         camPivot.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f); //Quaternion.Euler(0f, _aimAngleLeftRight, 0f) * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
         playerSpineBone.localRotation = _initialSpineLocalRotation * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
-
-        
-
-        //Vector3 position = aimTrack.localPosition;
-        //position.y = _aimAngleUpDown * 0.01f;
-        //aimTrack.localPosition = position;
     }
 
     private void CheckGrounded()
@@ -294,5 +253,14 @@ public class PlayerController : MonoBehaviour
             groundCheckDistance,
             groundLayer
         );
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = _isGrounded ? Color.green : Color.red;
+        Gizmos.DrawSphere(transform.position + groundCheckOffset, groundCheckRadius);
+        Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
+        Gizmos.DrawCube(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance/2, 
+                    new Vector3(1.5f* groundCheckRadius, groundCheckDistance , 1.5f * groundCheckRadius) );
     }
 }

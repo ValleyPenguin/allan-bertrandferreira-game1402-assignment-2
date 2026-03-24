@@ -16,12 +16,16 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private PlayerAnimator _playerAnimator;
 
+    private bool canInteract;
+
 
     void Start()
     {
         if (!anim) return;
 
         isOpenHash = Animator.StringToHash("IsOpen");
+
+        canInteract = true;
 
         //to make the chests keep growing and shrinking
         //transform.DOScale(1.1f, 1.2f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
@@ -38,20 +42,25 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        _playerAnimator.OnOpenedChest();
-
-        Debug.Log($"Interacted with {gameObject.name}");
-
-        Toast.Instance.HideToast();
-
-        _collectTween = transform.DOScale(0, .5f).SetEase(Ease.InBack).OnComplete(() =>
+        if (canInteract)
         {
-            transform.DOKill();
-            Destroy(gameObject);
-        });
+            canInteract = false;
 
-        //spawn the random power up a little bit above 
-        Instantiate(ChooseRandomPowerUp(), gameObject.transform.position + (Vector3.up * 2f), Quaternion.identity);
+            _playerAnimator.OnOpenedChest();
+
+            Debug.Log($"Interacted with {gameObject.name}");
+
+            Toast.Instance.HideToast();
+
+            Instantiate(ChooseRandomPowerUp(), gameObject.transform.position + (Vector3.up * 2f), Quaternion.identity);
+
+            _collectTween = transform.DOScale(0, .5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                transform.DOKill();
+                Destroy(gameObject);
+                canInteract = true;
+            });
+        }    
     }
 
     void OnDestroy()
@@ -61,7 +70,11 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     public void OnHoverOff()
     {
-        anim?.SetBool(isOpenHash, false);
+        if (anim != null)
+        {
+            anim?.SetBool(isOpenHash, false);
+        }
+
         Debug.Log("Interactor out!");
         Toast.Instance.HideToast();
     }

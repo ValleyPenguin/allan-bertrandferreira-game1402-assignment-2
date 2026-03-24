@@ -19,7 +19,7 @@ public class SpeedPowerUp : MonoBehaviour
             
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
-                Toast.Instance.ShowToast("Upgraded Player Speed!");
+                Toast.Instance.ShowToast("Upgraded Player Speed by: " + speedBoostUpgradeStrength + "!");
                 playerController.moveSpeed += speedBoostUpgradeStrength;
                 transform.DOKill();
                 Toast.Instance.HideToastWithDelay(1.5f);

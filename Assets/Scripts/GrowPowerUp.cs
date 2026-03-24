@@ -18,7 +18,7 @@ public class GrowPowerUp : MonoBehaviour
 
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
-                Toast.Instance.ShowToast("Upgraded Player Size!");
+                Toast.Instance.ShowToast("Upgraded Player Size by: " + playerSizeUpgradeStrength + "!");
                 playerController.playerTransform.localScale *= playerSizeUpgradeStrength;
                 transform.DOKill();
                 Toast.Instance.HideToastWithDelay(1.5f);
