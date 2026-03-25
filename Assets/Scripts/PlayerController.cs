@@ -114,8 +114,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckGrounded();
-        _characterController.Move(_velocity * Time.deltaTime);
-        
+  
         if (_currentState == PlayerState.EXPLORE)
         {
             ShowHideCrosshair.Instance.HideCrosshair();
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
         else if (_currentState == PlayerState.AIM)
         {
 
-            _aimAngleLeftRight += _lookInput.x * rotationSpeedAimed * Time.deltaTime;
+            _aimAngleLeftRight += _lookInput.x * rotationSpeedAimed;
             transform.rotation = Quaternion.Euler(0f, _aimAngleLeftRight, 0f);
 
 
@@ -135,6 +134,8 @@ public class PlayerController : MonoBehaviour
             _camForward = playerCamera.transform.forward;
             _camForward.y = 0f;
         }
+
+        _characterController.Move(_velocity * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -235,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAimTrack()
     {
-        _aimAngleUpDown -= _lookInput.y * rotationSpeedAimed * Time.deltaTime;
+        _aimAngleUpDown -= _lookInput.y * rotationSpeedAimed;
         _aimAngleUpDown = Mathf.Clamp(_aimAngleUpDown, minAimAngle, maxAimAngle);
 
 

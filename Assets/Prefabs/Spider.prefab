@@ -68,6 +68,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 486bd4f69731eb3419b6db665c08b2fb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8318139585935916098}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 486bd4f69731eb3419b6db665c08b2fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1347963769486675190}
   m_SourcePrefab: {fileID: 100100000, guid: 486bd4f69731eb3419b6db665c08b2fb, type: 3}
 --- !u!1 &3449153805672933191 stripped
 GameObject:
@@ -130,8 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb331dd38ab245b439d650f055c02239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spider
+  spiderGroundCheckRadius: 1.25
+  spiderGroundCheckOffset: 0.91
   agent: {fileID: -1016306078955759697}
-  player: {fileID: 55633083938870462, guid: 1df87930ddf8e014b897f88b696a8dee, type: 3}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  rb: {fileID: -1347963769486675190}
 --- !u!65 &8318139585935916098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,3 +161,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.69, y: 1.59, z: 3.37}
   m_Center: {x: 0, y: 0.85, z: -0.4}
+--- !u!54 &-1347963769486675190
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3449153805672933191}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
