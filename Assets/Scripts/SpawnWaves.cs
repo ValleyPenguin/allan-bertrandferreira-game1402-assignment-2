@@ -17,35 +17,36 @@ public class SpawnWaves : MonoBehaviour
         waveCounter = 0;
         
         StartCoroutine(SpawnWaveWithDelay());
+
     }
 
  
 
-    private void SpawnSpiderWave(int waveCounterNumber)
+    private void SpawnSpiderWave()
     {
 
         Debug.Log("SpawnSpiderWave function called!");
-        switch(waveCounterNumber){
+        switch(waveCounter){
             case 0:
-                for (int i = 0; i < waveNumberOfSpiders[0]; i++)
+                for (int i = 1; i < waveNumberOfSpiders[0]; i++)
                 {
                     Instantiate(spiderPrefab, GetRandomPositionInArea(), Quaternion.identity);
                 }
                 break;
             case 1:
-                for (int i = 0; i < waveNumberOfSpiders[1]; i++)
+                for (int i = 1; i < waveNumberOfSpiders[1]; i++)
                 {
                     Instantiate(spiderPrefab, GetRandomPositionInArea(), Quaternion.identity);
                 }
                 break;
             case 2:
-                for (int i = 0; i < waveNumberOfSpiders[2]; i++)
+                for (int i = 1; i < waveNumberOfSpiders[2]; i++)
                 {
                     Instantiate(spiderPrefab, GetRandomPositionInArea(), Quaternion.identity);
                 }
                 break;
             case 3:
-                for (int i = 0; i < waveNumberOfSpiders[3]; i++)
+                for (int i = 1; i < waveNumberOfSpiders[3]; i++)
                 {
                     Instantiate(spiderPrefab, GetRandomPositionInArea(), Quaternion.identity);
                 }
@@ -65,11 +66,13 @@ public class SpawnWaves : MonoBehaviour
 
     private IEnumerator SpawnWaveWithDelay()
     {
-        for (int i = 0; i < waveNumberOfSpiders.Length; i++)
+        for (int i = 1; i < waveNumberOfSpiders.Length; i++)
         {
             Debug.Log("Spawning Wave " + waveCounter);
-            SpawnSpiderWave(waveCounter);
+            SpawnSpiderWave();
+            Toast.Instance.ShowToast("Spawning Wave " + waveCounter + "! (" + waveNumberOfSpiders[waveCounter] + " Spiders!)");
             waveCounter++;
+            Toast.Instance.HideToastWithDelay(2f);
             yield return new WaitForSeconds(20f);
         }
     }
