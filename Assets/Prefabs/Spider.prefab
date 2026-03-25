@@ -272,6 +272,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rb: {fileID: -1347963769486675190}
+  numberOfSpidersKilled: 0
+  waveSpawnManager: {fileID: 629462814650903608, guid: 528f7009aad398e448a6e0544dccec63, type: 3}
 --- !u!65 &8318139585935916098
 BoxCollider:
   m_ObjectHideFlags: 0

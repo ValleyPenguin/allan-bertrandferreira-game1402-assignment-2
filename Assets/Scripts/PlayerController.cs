@@ -18,9 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
 
-
-    
-
     public event Action OnJumpEvent;
 
     private Vector2 _moveInput;
@@ -240,7 +237,7 @@ public class PlayerController : MonoBehaviour
         _aimAngleUpDown = Mathf.Clamp(_aimAngleUpDown, minAimAngle, maxAimAngle);
 
 
-        camPivot.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f); //Quaternion.Euler(0f, _aimAngleLeftRight, 0f) * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
+        camPivot.localRotation = Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
         playerSpineBone.localRotation = _initialSpineLocalRotation * Quaternion.Euler(_aimAngleUpDown, 0f, 0f);
     }
 

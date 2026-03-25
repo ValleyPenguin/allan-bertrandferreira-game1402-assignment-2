@@ -16,7 +16,6 @@ public class SpeedPowerUp : MonoBehaviour
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
 
-            
             transform.DOScale(0, .1f).From(.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 Toast.Instance.ShowToast("Upgraded Player Speed by: " + speedBoostUpgradeStrength + "!");

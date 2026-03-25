@@ -72,7 +72,7 @@ public class Shooter : MonoBehaviour
         if (_currentState != PlayerState.AIM) return;
 
         muzzleFlash.Play();
-        audioSource.pitch = Random.Range(0.75f, 1.25f);
+        audioSource.pitch = Random.Range(0.75f, 1.55f);
         
         audioSource.Play();
 

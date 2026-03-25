@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
 
     public int playerHealth;
 
+    public bool didPlayerDie;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -19,29 +21,21 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        
+        didPlayerDie = false;
     }
 
-    void Update()
+    private void Update()
     {
         if (playerHealth <= 0)
         {
-            gameObject.Destroy();
+            didPlayerDie = true;
+            Destroy(gameObject);
             Toast.Instance.ShowToast("Ya lost!");
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
         }
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Collided with spider!");
-            playerHealth--;
-        }
-    }*/
 
     private void OnTriggerEnter(Collider other)
     {

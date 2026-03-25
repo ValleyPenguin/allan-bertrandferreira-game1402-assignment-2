@@ -20,29 +20,39 @@ public class Spider : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
 
+    private SpawnWaves wavesSpawner;
+
+    private GameObject waveSpawnManager;
+
+    private PlayerHealth playerHealth;
+
     private void Start()
     {
         //agent = gameObject.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
+        waveSpawnManager = GameObject.FindWithTag("WaveManager");
+        playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         agent.enabled = false;
         spiderStartedWalking = false;
         if (player != null)
         {
             playerTarget = player.transform;
         }
+
+        wavesSpawner = waveSpawnManager.GetComponent<SpawnWaves>();
     }
 
 
     private void Update()
     {
-        if(player != null)
+        /*if (player != null)
         {
             if (SpiderGroundCheck())
             {
                 agent.SetDestination(playerTarget.position);
             }
-        }
-        if(player = null)
+        }*/
+        if(player == null)
         {
             player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
         }
@@ -63,11 +73,14 @@ public class Spider : MonoBehaviour
             startSpiderNavMeshMovement();
         }
         else if (spiderStartedWalking)
-        {
-            agent.enabled = true;
-            rb.isKinematic = true;
-            //Debug.Log("Spider started chasing ya!");
-            agent.SetDestination(playerTarget.position);
+        { 
+            if (!playerHealth.didPlayerDie)
+            {
+                agent.enabled = true;
+                rb.isKinematic = true;
+                //Debug.Log("Spider started chasing ya!");
+                agent.SetDestination(playerTarget.position);
+            }
         }
     }
 
@@ -75,6 +88,8 @@ public class Spider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("bullet"))
         {
+            wavesSpawner.numberOfSpidersKilled++;
+            Debug.Log(wavesSpawner.numberOfSpidersKilled);
             Destroy(gameObject);
         }
     }
@@ -94,8 +109,11 @@ public class Spider : MonoBehaviour
 
     private void startSpiderNavMeshMovement()
     {
-        agent.enabled = true;
-        agent.SetDestination(playerTarget.position);
-        spiderStartedWalking = true;
+        if (!playerHealth.didPlayerDie)
+        {
+            agent.enabled = true;
+            agent.SetDestination(playerTarget.position);
+            spiderStartedWalking = true;
+        }  
     }
 }

@@ -30,7 +30,6 @@ public class PlayerInteractor : MonoBehaviour
             _interactable = _tempInteractable;
             _interactable?.OnHoverIn();
         }
-
     }
 
     private void OnTriggerExit(Collider other)
