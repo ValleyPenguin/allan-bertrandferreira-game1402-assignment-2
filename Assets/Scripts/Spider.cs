@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class Spider : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Spider : MonoBehaviour
     private GameObject player;
 
     private Transform playerTarget;
+    [SerializeField] private float chaseDistance;
+
+    [SerializeField] private float giveUpDistance;
+
+    [SerializeField] private float chaseCheckAngle;
 
     private bool spiderStartedWalking;
 
@@ -26,8 +32,20 @@ public class Spider : MonoBehaviour
 
     private PlayerHealth playerHealth;
 
+    [SerializeField] private Transform[] patrolPoints;
+
+    private SpiderState _currentState;
+
+    [SerializeField] private Transform _currentTarget;
+
+    private int counter;
+
+    private bool _isWaiting;
+
+
     private void Start()
     {
+        _currentState = SpiderState.IDLE;
         //agent = gameObject.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
         waveSpawnManager = GameObject.FindWithTag("WaveManager");
@@ -40,8 +58,47 @@ public class Spider : MonoBehaviour
         }
 
         wavesSpawner = waveSpawnManager.GetComponent<SpawnWaves>();
+
+
     }
 
+    void FixedUpdate()
+    {
+        if (_currentState == SpiderState.IDLE)
+        {
+            if (!_isWaiting)
+            {
+                StartCoroutine(WaitAndChooseARandomPointAndMove(5));
+
+                if (IsPlayerInRange() && IsInFOV())
+                {
+                    _currentState = SpiderState.CHASE;
+                }
+            }      
+        }
+        else if (_currentState == SpiderState.PATROL)
+        {
+            if (agent.remainingDistance <= .2f)
+            {
+                _currentState = SpiderState.IDLE;
+            }
+
+            //check for the player to chase
+            if (IsPlayerInRange() && IsInFOV())
+            {
+                _currentState = SpiderState.CHASE;
+            }
+        }
+        else if(_currentState == SpiderState.CHASE)
+        {
+            agent.SetDestination(playerTarget.position);
+
+            if (HasPlayerGoneAwayFromMeTooSAD())
+            {
+                _currentState = SpiderState.IDLE;
+            }
+        }
+    }
 
     private void Update()
     {
@@ -52,7 +109,7 @@ public class Spider : MonoBehaviour
                 agent.SetDestination(playerTarget.position);
             }
         }*/
-        if(player == null)
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
         }
@@ -73,7 +130,7 @@ public class Spider : MonoBehaviour
             startSpiderNavMeshMovement();
         }
         else if (spiderStartedWalking)
-        { 
+        {
             if (!playerHealth.didPlayerDie)
             {
                 agent.enabled = true;
@@ -114,6 +171,40 @@ public class Spider : MonoBehaviour
             agent.enabled = true;
             agent.SetDestination(playerTarget.position);
             spiderStartedWalking = true;
-        }  
+        }
+    }
+
+    private void ChooseARandomPointAndMove()
+    {
+        if (patrolPoints.Length <= 0) return;
+        _currentTarget = patrolPoints[Random.Range(0, patrolPoints.Length)];
+        agent.SetDestination(_currentTarget.position);
+    }
+
+    IEnumerator WaitAndChooseARandomPointAndMove(float timeToWait){
+        _isWaiting = true;
+        Debug.Log("Called WaitAndChooseARandomPointAndMove method!");
+        yield return new WaitForSeconds(timeToWait);
+        _currentState = SpiderState.PATROL;
+        ChooseARandomPointAndMove();
+        counter++;
+        _isWaiting = false;
+    }
+
+    private bool IsPlayerInRange()
+    {
+        return Vector3.Distance(transform.position, playerTarget.position) <= chaseDistance;
+    }
+
+    private bool HasPlayerGoneAwayFromMeTooSAD()
+    {
+        return Vector3.Distance(transform.position, playerTarget.position) >= giveUpDistance;
+    }
+
+    Vector3 _directionToPlayer;
+    private bool IsInFOV()
+    {
+        _directionToPlayer = (playerTarget.position - transform.position).normalized;
+        return Vector3.Angle(transform.forward, _directionToPlayer) <= chaseCheckAngle;
     }
 }
