@@ -47,6 +47,8 @@ public class Spider : MonoBehaviour
     [SerializeField] private Transform minBounds;
     [SerializeField] private Transform maxBounds;
 
+    [SerializeField] private Animator animator;
+
 
     private void Start()
     {
@@ -70,6 +72,8 @@ public class Spider : MonoBehaviour
     {
         if (_currentState == SpiderState.IDLE)
         {
+
+            animator.SetBool("isIdle", true);
             if (!_isWaiting)
             {
                 StartCoroutine(WaitAndChooseARandomPointAndMove(5));
@@ -83,6 +87,7 @@ public class Spider : MonoBehaviour
         {
             if (agent.isOnNavMesh)
             {
+                animator.SetBool("isIdle", false);
                 if (agent.remainingDistance <= 4f)
                 {
                     _currentState = SpiderState.IDLE;
@@ -102,6 +107,7 @@ public class Spider : MonoBehaviour
         {
             if (agent.isOnNavMesh)
             {
+                animator.SetBool("isIdle", false);
                 agent.SetDestination(playerTarget.position);
 
                 if (HasPlayerGoneAwayFromMeTooSAD())

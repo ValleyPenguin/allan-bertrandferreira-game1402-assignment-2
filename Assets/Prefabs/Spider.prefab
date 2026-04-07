@@ -282,6 +282,7 @@ MonoBehaviour:
   _currentTarget: {x: 0, y: 0, z: 0}
   minBounds: {fileID: 261301242783415175, guid: 2699bc006abf6f64cb59232d5f44fbb1, type: 3}
   maxBounds: {fileID: 3950835191310937822, guid: a183cd6eee7981e46bf4fdbbdc5c2eed, type: 3}
+  animator: {fileID: 3286395055494015999}
 --- !u!65 &8318139585935916098
 BoxCollider:
   m_ObjectHideFlags: 0
