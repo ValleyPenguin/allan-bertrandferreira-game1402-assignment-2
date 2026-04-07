@@ -268,8 +268,8 @@ MonoBehaviour:
   spiderGroundCheckRadius: 1.25
   spiderGroundCheckOffset: 0.91
   agent: {fileID: -1016306078955759697}
-  chaseDistance: 40
-  giveUpDistance: 4
+  chaseDistance: 45
+  giveUpDistance: 60
   chaseCheckAngle: 120
   groundLayerMask:
     serializedVersion: 2
@@ -279,9 +279,9 @@ MonoBehaviour:
   - {fileID: 6258762743336496266, guid: b895dfca601c58240b85e4f3e87c08ca, type: 3}
   - {fileID: 4139192700353875983, guid: faaab2b11d4888c48bbe1bc2f6cf252a, type: 3}
   - {fileID: 4657763101946736158, guid: b22a410fd7ade8f41854c424787a9c65, type: 3}
-  _currentTarget: {fileID: 0}
-  minBounds: {x: -62.88, y: 34.6, z: 61.99}
-  maxBounds: {x: 41.6, y: 73.4, z: -50.1}
+  _currentTarget: {x: 0, y: 0, z: 0}
+  minBounds: {fileID: 261301242783415175, guid: 2699bc006abf6f64cb59232d5f44fbb1, type: 3}
+  maxBounds: {fileID: 3950835191310937822, guid: a183cd6eee7981e46bf4fdbbdc5c2eed, type: 3}
 --- !u!65 &8318139585935916098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.69, y: 1.59, z: 3.37}
+  m_Size: {x: 2.69, y: 0.78, z: 3.37}
   m_Center: {x: 0, y: 0.85, z: -0.4}
 --- !u!54 &-1347963769486675190
 Rigidbody:
@@ -328,5 +328,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1

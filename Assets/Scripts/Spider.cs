@@ -44,8 +44,8 @@ public class Spider : MonoBehaviour
 
     private Vector3 _directionToPlayer;
 
-    [SerializeField] private Vector3 minBounds;
-    [SerializeField] private Vector3 maxBounds;
+    [SerializeField] private Transform minBounds;
+    [SerializeField] private Transform maxBounds;
 
 
     private void Start()
@@ -81,25 +81,33 @@ public class Spider : MonoBehaviour
         }
         else if (_currentState == SpiderState.PATROL)
         {
-            if (agent.remainingDistance <= 2f)
+            if (agent.isOnNavMesh)
             {
-                _currentState = SpiderState.IDLE;
+                if (agent.remainingDistance <= 4f)
+                {
+                    _currentState = SpiderState.IDLE;
+                }
+
+                //check for the player to chase
+                if (IsPlayerInRange()) //&& IsInFOV())
+                {
+                    _currentState = SpiderState.CHASE;
+                    agent.SetDestination(playerTarget.position);
+                }
             }
 
-            //check for the player to chase
-            if (IsPlayerInRange()) //&& IsInFOV())
-            {
-                _currentState = SpiderState.CHASE;
-                agent.SetDestination(playerTarget.position);
-            }
+            
         }
         else if(_currentState == SpiderState.CHASE)
         {
-            agent.SetDestination(playerTarget.position);
-
-            if (HasPlayerGoneAwayFromMeTooSAD())
+            if (agent.isOnNavMesh)
             {
-                _currentState = SpiderState.CHASE;
+                agent.SetDestination(playerTarget.position);
+
+                if (HasPlayerGoneAwayFromMeTooSAD())
+                {
+                    _currentState = SpiderState.PATROL;
+                }
             }
         }
     }
@@ -182,15 +190,20 @@ public class Spider : MonoBehaviour
         
         RaycastHit hit;
 
-        float randomX = Random.Range(minBounds.x, maxBounds.x);
-        float randomY = Random.Range(minBounds.y, maxBounds.y);
+        float randomX = Random.Range(minBounds.position.x, maxBounds.position.x);
+        float randomZ = Random.Range(minBounds.position.z, maxBounds.position.z);
         
-        Physics.Raycast(new Vector3(randomX, randomY, minBounds.z), Vector3.down, out hit, 9999f, groundLayerMask);
+        if(Physics.Raycast(new Vector3(randomX, minBounds.position.y, randomZ), Vector3.down, out hit, 9999f, groundLayerMask) && SpiderGroundCheck())
+        {
+            _currentTarget = hit.point;
+            agent.SetDestination(_currentTarget);
+        }
+        else
+        {
+            Debug.Log("Raycast did not hit!");
+        }
 
-        _currentTarget = hit.point;
-
-        //patrolPoints[Random.Range(0, patrolPoints.Length)];
-        agent.SetDestination(_currentTarget);
+        //patrolPoints[Random.Range(0, patrolPoints.Length)];  
     }
 
     IEnumerator WaitAndChooseARandomPointAndMove(float timeToWait){
