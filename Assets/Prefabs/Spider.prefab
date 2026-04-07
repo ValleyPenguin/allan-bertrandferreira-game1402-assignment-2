@@ -268,9 +268,9 @@ MonoBehaviour:
   spiderGroundCheckRadius: 1.25
   spiderGroundCheckOffset: 0.91
   agent: {fileID: -1016306078955759697}
-  chaseDistance: 2
+  chaseDistance: 40
   giveUpDistance: 4
-  chaseCheckAngle: 60
+  chaseCheckAngle: 120
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -280,6 +280,8 @@ MonoBehaviour:
   - {fileID: 4139192700353875983, guid: faaab2b11d4888c48bbe1bc2f6cf252a, type: 3}
   - {fileID: 4657763101946736158, guid: b22a410fd7ade8f41854c424787a9c65, type: 3}
   _currentTarget: {fileID: 0}
+  minBounds: {x: -62.88, y: 34.6, z: 61.99}
+  maxBounds: {x: 41.6, y: 73.4, z: -50.1}
 --- !u!65 &8318139585935916098
 BoxCollider:
   m_ObjectHideFlags: 0

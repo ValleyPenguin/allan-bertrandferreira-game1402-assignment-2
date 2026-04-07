@@ -36,13 +36,16 @@ public class Spider : MonoBehaviour
 
     private SpiderState _currentState;
 
-    [SerializeField] private Transform _currentTarget;
+    [SerializeField] private Vector3 _currentTarget;
 
     private int counter;
 
     private bool _isWaiting;
 
     private Vector3 _directionToPlayer;
+
+    [SerializeField] private Vector3 minBounds;
+    [SerializeField] private Vector3 maxBounds;
 
 
     private void Start()
@@ -61,7 +64,6 @@ public class Spider : MonoBehaviour
 
         wavesSpawner = waveSpawnManager.GetComponent<SpawnWaves>();
 
-
     }
 
     void FixedUpdate()
@@ -79,15 +81,16 @@ public class Spider : MonoBehaviour
         }
         else if (_currentState == SpiderState.PATROL)
         {
-            if (agent.remainingDistance <= .2f)
+            if (agent.remainingDistance <= 2f)
             {
                 _currentState = SpiderState.IDLE;
             }
 
             //check for the player to chase
-            if (IsPlayerInRange() && IsInFOV())
+            if (IsPlayerInRange()) //&& IsInFOV())
             {
                 _currentState = SpiderState.CHASE;
+                agent.SetDestination(playerTarget.position);
             }
         }
         else if(_currentState == SpiderState.CHASE)
@@ -96,7 +99,7 @@ public class Spider : MonoBehaviour
 
             if (HasPlayerGoneAwayFromMeTooSAD())
             {
-                _currentState = SpiderState.IDLE;
+                _currentState = SpiderState.CHASE;
             }
         }
     }
@@ -173,9 +176,21 @@ public class Spider : MonoBehaviour
 
     private void ChooseARandomPointAndMove()
     {
-        if (patrolPoints.Length <= 0) return;
-        _currentTarget = patrolPoints[Random.Range(0, patrolPoints.Length)];
-        agent.SetDestination(_currentTarget.position);
+
+        //if (patrolPoints.Length <= 0) return;
+        
+        
+        RaycastHit hit;
+
+        float randomX = Random.Range(minBounds.x, maxBounds.x);
+        float randomY = Random.Range(minBounds.y, maxBounds.y);
+        
+        Physics.Raycast(new Vector3(randomX, randomY, minBounds.z), Vector3.down, out hit, 9999f, groundLayerMask);
+
+        _currentTarget = hit.point;
+
+        //patrolPoints[Random.Range(0, patrolPoints.Length)];
+        agent.SetDestination(_currentTarget);
     }
 
     IEnumerator WaitAndChooseARandomPointAndMove(float timeToWait){
@@ -203,6 +218,4 @@ public class Spider : MonoBehaviour
         _directionToPlayer = (playerTarget.position - transform.position).normalized;
         return Vector3.Angle(transform.forward, _directionToPlayer) <= chaseCheckAngle;
     }
-
-
 }
