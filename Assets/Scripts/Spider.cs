@@ -42,6 +42,8 @@ public class Spider : MonoBehaviour
 
     private bool _isWaiting;
 
+    private Vector3 _directionToPlayer;
+
 
     private void Start()
     {
@@ -69,12 +71,11 @@ public class Spider : MonoBehaviour
             if (!_isWaiting)
             {
                 StartCoroutine(WaitAndChooseARandomPointAndMove(5));
-
-                if (IsPlayerInRange() && IsInFOV())
-                {
-                    _currentState = SpiderState.CHASE;
-                }
-            }      
+            }
+            if (IsPlayerInRange() && IsInFOV())
+            {
+                _currentState = SpiderState.CHASE;
+            }
         }
         else if (_currentState == SpiderState.PATROL)
         {
@@ -102,13 +103,6 @@ public class Spider : MonoBehaviour
 
     private void Update()
     {
-        /*if (player != null)
-        {
-            if (SpiderGroundCheck())
-            {
-                agent.SetDestination(playerTarget.position);
-            }
-        }*/
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
@@ -126,19 +120,22 @@ public class Spider : MonoBehaviour
         {
             agent.enabled = true;
             rb.isKinematic = true;
+            _currentState = SpiderState.PATROL;
+            spiderStartedWalking = true;
             //Debug.Log("Spider just landed!");
-            startSpiderNavMeshMovement();
+            //startSpiderNavMeshMovement();
+
         }
-        else if (spiderStartedWalking)
+        /*else if (spiderStartedWalking)
         {
             if (!playerHealth.didPlayerDie)
             {
                 agent.enabled = true;
                 rb.isKinematic = true;
                 //Debug.Log("Spider started chasing ya!");
-                agent.SetDestination(playerTarget.position);
+                //agent.SetDestination(playerTarget.position);
             }
-        }
+        }*/
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -164,7 +161,7 @@ public class Spider : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + new Vector3(0f, spiderGroundCheckOffset, 0f), spiderGroundCheckRadius);
     }
 
-    private void startSpiderNavMeshMovement()
+    /*private void startSpiderNavMeshMovement()
     {
         if (!playerHealth.didPlayerDie)
         {
@@ -172,7 +169,7 @@ public class Spider : MonoBehaviour
             agent.SetDestination(playerTarget.position);
             spiderStartedWalking = true;
         }
-    }
+    }*/
 
     private void ChooseARandomPointAndMove()
     {
@@ -201,10 +198,11 @@ public class Spider : MonoBehaviour
         return Vector3.Distance(transform.position, playerTarget.position) >= giveUpDistance;
     }
 
-    Vector3 _directionToPlayer;
     private bool IsInFOV()
     {
         _directionToPlayer = (playerTarget.position - transform.position).normalized;
         return Vector3.Angle(transform.forward, _directionToPlayer) <= chaseCheckAngle;
     }
+
+
 }

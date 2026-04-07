@@ -275,7 +275,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rb: {fileID: -1347963769486675190}
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 6258762743336496266, guid: b895dfca601c58240b85e4f3e87c08ca, type: 3}
+  - {fileID: 4139192700353875983, guid: faaab2b11d4888c48bbe1bc2f6cf252a, type: 3}
+  - {fileID: 4657763101946736158, guid: b22a410fd7ade8f41854c424787a9c65, type: 3}
   _currentTarget: {fileID: 0}
 --- !u!65 &8318139585935916098
 BoxCollider:
