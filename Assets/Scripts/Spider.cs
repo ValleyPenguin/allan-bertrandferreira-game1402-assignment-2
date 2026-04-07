@@ -36,7 +36,7 @@ public class Spider : MonoBehaviour
 
     private SpiderState _currentState;
 
-    [SerializeField] private Vector3 _currentTarget;
+    private Vector3 _currentTarget;
 
     private int counter;
 

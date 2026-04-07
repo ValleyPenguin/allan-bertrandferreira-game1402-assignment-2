@@ -33,7 +33,6 @@ public class ChestInteractable : MonoBehaviour, IInteractable
 
     public void OnHoverIn()
     {
-        Debug.Log("Interactor in!");
         anim?.SetBool(isOpenHash, true);
 
         // TODO - Show UI
