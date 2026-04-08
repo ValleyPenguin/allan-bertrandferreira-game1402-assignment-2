@@ -56,9 +56,6 @@ public class Frog : MonoBehaviour
         }
 
         Vector3 frogJumpDirection = (_currentTarget - transform.position).normalized;
-
-        Quaternion targetRotation = Quaternion.LookRotation(frogJumpDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, frogRotationSpeed * Time.deltaTime);
     }
 
     private void Update()
@@ -97,7 +94,10 @@ public class Frog : MonoBehaviour
         if (FrogGroundCheck())
         {
             animator.SetTrigger("justJumped");
+            transform.LookAt(_currentTarget);
             rb.AddForce((frogJumpDirection + Vector3.up) * frogJumpForce, ForceMode.Force);
+            //Quaternion targetRotation = Quaternion.LookRotation(frogJumpDirection);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, frogRotationSpeed * Time.deltaTime);
         }
     }
 
@@ -113,7 +113,6 @@ public class Frog : MonoBehaviour
     private bool FrogGroundCheck()
     {
         bool isGrounded = Physics.CheckSphere(transform.position + new Vector3(0f, frogGroundCheckOffset, 0f), frogGroundCheckRadius, groundLayerMask);
-        //Debug.Log(isGrounded);
         return isGrounded;
     }
 
