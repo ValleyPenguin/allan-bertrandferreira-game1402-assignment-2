@@ -255,6 +255,79 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &87548674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87548671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfb90855addac64babffa4f328c5499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frog
+  minBounds: {fileID: 261301242783415175, guid: 2699bc006abf6f64cb59232d5f44fbb1, type: 3}
+  maxBounds: {fileID: 3950835191310937822, guid: a183cd6eee7981e46bf4fdbbdc5c2eed, type: 3}
+  chaseDistance: 25
+  attackDistance: 7
+  rb: {fileID: 87548675}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  frogJumpForce: 325
+  frogGroundCheckOffset: 0.67
+  frogGroundCheckRadius: 2.3
+  animator: {fileID: 87548673}
+  frogRotationSpeed: 2.5
+--- !u!54 &87548675
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87548671}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 80
+  m_CollisionDetection: 1
+--- !u!65 &87548676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87548671}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 2.55}
+  m_Center: {x: 0, y: 0.73, z: 0.15}
 --- !u!4 &113633418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6406354295519821929, guid: 63be19d25e319dc43a5a8c29ee36d9bb, type: 3}
@@ -4752,6 +4825,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 919757261d96afb459cdbcba63f5b0ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 87548673}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 919757261d96afb459cdbcba63f5b0ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87548674}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 919757261d96afb459cdbcba63f5b0ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87548675}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 919757261d96afb459cdbcba63f5b0ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87548676}
   m_SourcePrefab: {fileID: 100100000, guid: 919757261d96afb459cdbcba63f5b0ba, type: 3}
 --- !u!1 &1589125259
 GameObject:
@@ -6226,7 +6308,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 17.5
     Center: 17.5
-    Range: {x: -45, y: 60}
+    Range: {x: -30, y: 60}
     Wrap: 0
     Recentering:
       Enabled: 0
