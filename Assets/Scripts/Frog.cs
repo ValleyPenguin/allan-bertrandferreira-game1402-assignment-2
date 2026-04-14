@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +32,15 @@ public class Frog : MonoBehaviour
 
     [SerializeField] private float frogRotationSpeed;
 
+    private GameObject player;
+
     private Vector3 _currentTarget;
 
     private bool _isWaiting;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies");
         _currentState = FrogState.PATROL;
         playerTarget = GameObject.FindGameObjectWithTag("PlayerTargetForEnemies").GetComponent<Transform>();
     }
@@ -48,11 +52,11 @@ public class Frog : MonoBehaviour
         }
         else if (_currentState == FrogState.CHASE)
         {
-            if (!_isWaiting) StartCoroutine(WaitAndChooseARandomPointAndMove(2f));
+            if (!_isWaiting) StartCoroutine(WaitAndJumpTowardsPlayer(2f));
         }
         else if (_currentState == FrogState.ATTACK)
         {
-            if (!_isWaiting) StartCoroutine(WaitAndChooseARandomPointAndMove(2f));
+            if (!_isWaiting) StartCoroutine(WaitAndJumpTowardsPlayer(2f));
         }
 
         Vector3 frogJumpDirection = (_currentTarget - transform.position).normalized;
@@ -66,11 +70,11 @@ public class Frog : MonoBehaviour
         }
         else if(Vector3.Distance(transform.position, playerTarget.position) <= chaseDistance)
         {
-            _currentState = FrogState.PATROL;
+            _currentState = FrogState.CHASE;
         }
         else if(Vector3.Distance(transform.position, playerTarget.position) >= chaseDistance)
         {
-            _currentState = FrogState.CHASE;
+            _currentState = FrogState.PATROL;
         }
     }
 
@@ -94,10 +98,29 @@ public class Frog : MonoBehaviour
         if (FrogGroundCheck())
         {
             animator.SetTrigger("justJumped");
-            transform.LookAt(_currentTarget);
+            transform.LookAt(new Vector3(_currentTarget.x, transform.position.y, _currentTarget.z));
             rb.AddForce((frogJumpDirection + Vector3.up) * frogJumpForce, ForceMode.Force);
             //Quaternion targetRotation = Quaternion.LookRotation(frogJumpDirection);
             //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, frogRotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void JumpTowardsPlayer()
+    {
+        Debug.Log("In JumpTowardsPlayer function");
+
+        if (player != null)
+        {
+            Debug.Log("Player is not null, calculating frog jump direction");
+            Vector3 frogJumpDirectionTowardsPlayer = (player.transform.position - transform.position).normalized;
+        
+            if (FrogGroundCheck())
+            {
+                Debug.Log("Frog is grounded, jumping towards player");
+                animator.SetTrigger("justJumped");
+                transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+                rb.AddForce((frogJumpDirectionTowardsPlayer + Vector3.up) * frogJumpForce, ForceMode.Force);
+            }
         }
     }
 
@@ -110,10 +133,27 @@ public class Frog : MonoBehaviour
         _isWaiting = false;
     }
 
+    IEnumerator WaitAndJumpTowardsPlayer(float timeToWait)
+    {
+        _isWaiting = true;
+        yield return new WaitForSeconds(timeToWait);
+        _currentState = FrogState.CHASE;
+        JumpTowardsPlayer();
+        _isWaiting = false;
+    }
+
     private bool FrogGroundCheck()
     {
         bool isGrounded = Physics.CheckSphere(transform.position + new Vector3(0f, frogGroundCheckOffset, 0f), frogGroundCheckRadius, groundLayerMask);
         return isGrounded;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("bullet"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDrawGizmos()
