@@ -792,6 +792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -115.881645
@@ -1059,8 +1063,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15212339, y: 0, z: 0, w: 0.98836154}
-  m_LocalPosition: {x: -2.86, y: -1.5774713, z: 7.8314157}
+  m_LocalRotation: {x: -0.0028398081, y: 0.9917797, z: -0.022360548, w: -0.12595683}
+  m_LocalPosition: {x: -3.1617513, y: -2.8810003, z: 14.0356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1304,6 +1308,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1556,6 +1564,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572654734335785103, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.9537315
@@ -1799,7 +1815,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1584615250}
-  - {fileID: 2113069659}
+  - {fileID: 4418937817439840744}
   - {fileID: 1313079512}
   - {fileID: 658975465}
   - {fileID: 854078804}
@@ -2091,6 +2107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 109.70135
@@ -2208,6 +2228,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6406354295519821929, guid: 63be19d25e319dc43a5a8c29ee36d9bb, type: 3}
   m_PrefabInstance: {fileID: 2053036228}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &579464156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrogV2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.1008399
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.504157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.9130254
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
 --- !u!1001 &583612360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2353,6 +2430,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2548,6 +2629,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -86.3362
@@ -2671,6 +2756,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2922,6 +3011,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3586,6 +3679,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2636307483360116221, guid: cbe2e0f9cf5bc334fb5b390987e4298e, type: 3}
   m_PrefabInstance: {fileID: 1024554690}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &912888440
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrogV2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.2273035
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.3021283
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.92335564
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
 --- !u!1001 &919263594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4273,6 +4423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 110.70501
@@ -4587,6 +4741,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4926,6 +5084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -52.034943
@@ -5049,6 +5211,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5504,6 +5670,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.93761
@@ -5692,6 +5862,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
   m_PrefabInstance: {fileID: 427259721}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1568844744
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrogV2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.478949
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.85642713
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.094146
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
 --- !u!1001 &1571301031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5703,6 +5930,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5909,7 +6140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   damageFlashImage: {fileID: 665596578}
-  damageFlashFadeOutDuration: 0
+  playerDamageInterval: 0.5
   playerHealth: 5
   didPlayerDie: 0
 --- !u!54 &1610898938
@@ -7338,6 +7569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFrog (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 91.38196
@@ -7383,6 +7618,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+--- !u!1001 &1943369807
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrogV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.86074
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5784853
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.177034
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
 --- !u!4 &1953402899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1621991540713508019, guid: c8134dd87be4906419f13922ddc5bf4f, type: 3}
@@ -7584,63 +7876,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63be19d25e319dc43a5a8c29ee36d9bb, type: 3}
---- !u!1001 &2080343546
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 453409742}
-    m_Modifications:
-    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_Name
-      value: EnemyFrog (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 57.679264
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -182.83162
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
 --- !u!1001 &2099983352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7707,11 +7942,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2636307483360116221, guid: cbe2e0f9cf5bc334fb5b390987e4298e, type: 3}
   m_PrefabInstance: {fileID: 919263594}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2113069659 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
-  m_PrefabInstance: {fileID: 2080343546}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2142276489 stripped
 Transform:
@@ -8533,6 +8763,72 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbe2e0f9cf5bc334fb5b390987e4298e, type: 3}
+--- !u!1001 &3162339926543079624
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 453409742}
+    m_Modifications:
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_Name
+      value: EnemyFrogV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970844026176199378, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 57.679264
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -182.83162
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+--- !u!4 &4418937817439840744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5364788604370369425, guid: 7919962c58c4fcf4b87a85a5245e57ab, type: 3}
+  m_PrefabInstance: {fileID: 3162339926543079624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6543430407593074749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8601,6 +8897,10 @@ PrefabInstance:
     - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_Name
       value: EnemyFrog
+      objectReference: {fileID: 0}
+    - target: {fileID: 614744792457116467, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418937817069333522, guid: 6806fd27bb85c8b468260ff4cfa0efb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8733,3 +9033,7 @@ SceneRoots:
   - {fileID: 675325801431070382}
   - {fileID: 453409742}
   - {fileID: 437896290}
+  - {fileID: 1943369807}
+  - {fileID: 579464156}
+  - {fileID: 1568844744}
+  - {fileID: 912888440}

@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Image damageFlashImage;
 
+    [SerializeField] private float playerDamageInterval;
+
     private float opacityTimer = 0f;
 
     public static PlayerHealth Instance { get; private set; }
@@ -14,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public int playerHealth;
 
     public bool didPlayerDie;
+
+    private bool isBeingDamaged;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        isBeingDamaged = false;
         opacityTimer = 0f;
         didPlayerDie = false;
         damageFlashImage.color = new Color(1f, 1f, 1f, 0f);
@@ -52,13 +57,22 @@ public class PlayerHealth : MonoBehaviour
         damageFlashImage.color = new Color(1f, 1f, 1f, opacityTimer);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && isBeingDamaged == false)
         {
             Debug.Log("Collided with enemy!");
-            playerHealth--;
+            //playerHealth--;
+            StartCoroutine(DamagePlayerOnAnInterval(playerDamageInterval));
             opacityTimer = 1f;
         }
+    }
+
+    private IEnumerator DamagePlayerOnAnInterval(float interval)
+    {
+        isBeingDamaged = true;
+        playerHealth--;
+        yield return new WaitForSeconds(interval);
+        isBeingDamaged = false;
     }
 }
