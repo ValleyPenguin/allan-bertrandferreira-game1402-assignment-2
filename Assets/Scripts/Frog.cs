@@ -64,17 +64,20 @@ public class Frog : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, playerTarget.position) <= attackDistance)
+        if (player != null)
         {
-            _currentState = FrogState.ATTACK;
-        }
-        else if(Vector3.Distance(transform.position, playerTarget.position) <= chaseDistance)
-        {
-            _currentState = FrogState.CHASE;
-        }
-        else if(Vector3.Distance(transform.position, playerTarget.position) >= chaseDistance)
-        {
-            _currentState = FrogState.PATROL;
+            if (Vector3.Distance(transform.position, playerTarget.position) <= attackDistance)
+            {
+                _currentState = FrogState.ATTACK;
+            }
+            else if (Vector3.Distance(transform.position, playerTarget.position) <= chaseDistance)
+            {
+                _currentState = FrogState.CHASE;
+            }
+            else if (Vector3.Distance(transform.position, playerTarget.position) >= chaseDistance)
+            {
+                _currentState = FrogState.PATROL;
+            }
         }
     }
 

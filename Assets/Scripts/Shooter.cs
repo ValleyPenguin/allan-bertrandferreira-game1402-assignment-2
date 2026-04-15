@@ -47,8 +47,6 @@ public class Shooter : MonoBehaviour
         shootInput.Enable();
         shootInput.performed += Shoot;
 
-
-        //_playerController.OnStateUpdated += (state) => _currentState = state;
         _playerController.OnStateUpdated += StateUpdate;
 
     }
@@ -99,8 +97,3 @@ public class Shooter : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(shootForce * _shootDirection, ForceMode.Impulse);
     }
 }
-
-//CHALLENGE FROM INDI - Make direction of arrow go with the velocity direction,
-// so if its going downwards it should be aiming downwards-might not need to do if using guns instead
-// ALSO - Destroy Arrows/Bullets after a while, so they don't go on forever
-// ALSO - perhaps add a crosshair(of course)

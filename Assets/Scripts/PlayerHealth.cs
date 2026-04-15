@@ -2,12 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using VFolders.Libs;
 using System.Collections;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Image damageFlashImage;
 
     [SerializeField] private float playerDamageInterval;
+
+    [SerializeField] private int playerMaxHealth;
+
+    [SerializeField] private TMP_Text healthText;
 
     private float opacityTimer = 0f;
 
@@ -72,7 +77,13 @@ public class PlayerHealth : MonoBehaviour
     {
         isBeingDamaged = true;
         playerHealth--;
+        UpdateHealthUI();
         yield return new WaitForSeconds(interval);
         isBeingDamaged = false;
+    }
+
+    private void UpdateHealthUI()
+    {
+        healthText.text = playerHealth + " / " + playerMaxHealth;
     }
 }
