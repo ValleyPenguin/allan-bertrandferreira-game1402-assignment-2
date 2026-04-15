@@ -35,7 +35,6 @@ public class ChestInteractable : MonoBehaviour, IInteractable
     {
         anim?.SetBool(isOpenHash, true);
 
-        // TODO - Show UI
         Toast.Instance.ShowToast("Press \"E\" to Interact");
     }
 

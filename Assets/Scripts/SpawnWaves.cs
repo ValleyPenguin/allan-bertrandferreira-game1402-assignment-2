@@ -1,11 +1,17 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnWaves : MonoBehaviour
 {
+    public static SpawnWaves Instance { get; private set; }
+
     [SerializeField] private int[] waveNumberOfSpiders;
 
     [SerializeField] private GameObject spiderPrefab;
+
+    [SerializeField] private GameObject victoryRoyaleImageObject;
 
     private int waveCounter;
 
@@ -20,12 +26,25 @@ public class SpawnWaves : MonoBehaviour
 
     private void Start()
     {
+        victoryRoyaleImageObject.SetActive(false);
         didPlayerWin = false;
         numberOfSpidersSpawned = 0;
         waveCounter = 0;
         
         StartCoroutine(SpawnWaveWithDelay());
 
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     private void Update()
@@ -36,6 +55,7 @@ public class SpawnWaves : MonoBehaviour
             {
                 Toast.Instance.ShowToast("You killed all the spiders, you win!");
                 didPlayerWin = true;
+                StartCoroutine(ShowVictoryBannerAndHideAfterDelay(7f));
             }
         }
     }
@@ -129,5 +149,13 @@ public class SpawnWaves : MonoBehaviour
         float randomZ = Random.Range(minBounds.z, maxBounds.z);
 
         return new Vector3(randomX, randomY, randomZ);
+    }
+
+    private IEnumerator ShowVictoryBannerAndHideAfterDelay(float delay)
+    {
+        Debug.Log("Showing victory banner now");
+        victoryRoyaleImageObject.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        victoryRoyaleImageObject.SetActive(false);
     }
 }

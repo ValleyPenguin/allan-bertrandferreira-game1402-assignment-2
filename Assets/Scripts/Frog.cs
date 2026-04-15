@@ -7,8 +7,6 @@ public class Frog : MonoBehaviour
 {
     private FrogState _currentState;
 
-    //private GameObject player;
-
     private Transform playerTarget;
 
     [SerializeField] private Transform minBounds;
@@ -103,8 +101,6 @@ public class Frog : MonoBehaviour
             animator.SetTrigger("justJumped");
             transform.LookAt(new Vector3(_currentTarget.x, transform.position.y, _currentTarget.z));
             rb.AddForce((frogJumpDirection + Vector3.up) * frogJumpForce, ForceMode.Force);
-            //Quaternion targetRotation = Quaternion.LookRotation(frogJumpDirection);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, frogRotationSpeed * Time.deltaTime);
         }
     }
 
