@@ -4,50 +4,46 @@ using UnityEngine.InputSystem;
 
 public class Shooter : MonoBehaviour
 {
-    [SerializeField] private InputAction shootInput;
+    [SerializeField] protected InputAction shootInput;
 
-    [SerializeField] private Transform shootPoint;
+    [SerializeField] protected Transform shootPoint;
 
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] protected GameObject bulletPrefab;
 
-    [SerializeField] private float shootForce;
+    [SerializeField] protected float shootForce;
 
-    [SerializeField] private Transform aimTrack;
+    [SerializeField] protected Transform aimTrack;
 
-    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] protected ParticleSystem muzzleFlash;
 
-    [SerializeField] private Camera cam;
+    [SerializeField] protected Camera cam;
 
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
 
-    private Vector3 rayHitPosition;
+    protected Vector3 rayHitPosition;
 
-    private GameObject bullet;
+    protected GameObject bullet;
 
-    private Vector3 _shootDirection;
-    private PlayerState _currentState;
+    protected Vector3 _shootDirection;
+    protected PlayerState _currentState;
 
-    private PlayerController _playerController;
+    protected PlayerController _playerController;
 
-    [SerializeField] private LayerMask hitLayers;
+    [SerializeField] protected LayerMask hitLayers;
 
 
     void Awake()
     {
-        _playerController = GetComponent<PlayerController>();
-    }
-    
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+        _playerController = GetComponentInParent<PlayerController>();
+        audioSource = GetComponentInParent<AudioSource>();
+    } 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         shootInput.Enable();
         shootInput.performed += Shoot;
 
-        _playerController.OnStateUpdated += StateUpdate;
+        if (_playerController != null) _playerController.OnStateUpdated += StateUpdate;
 
     }
 
@@ -56,16 +52,14 @@ public class Shooter : MonoBehaviour
         _currentState = state;
     }
 
-
-
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         shootInput.Disable();
         shootInput.performed -= Shoot;
-        _playerController.OnStateUpdated -= StateUpdate;
+        if(_playerController != null) _playerController.OnStateUpdated -= StateUpdate;
     }
 
-    private void Shoot(InputAction.CallbackContext context)
+    protected virtual void Shoot(InputAction.CallbackContext context)
     {
         if (_currentState != PlayerState.AIM) return;
 

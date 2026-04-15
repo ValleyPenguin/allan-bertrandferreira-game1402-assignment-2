@@ -32,7 +32,6 @@ public class SpawnWaves : MonoBehaviour
     {
         if (waveCounter == waveNumberOfSpiders.Length)
         {
-            Debug.Log("In final wave!");
             if (numberOfSpidersKilled >= numberOfSpidersSpawned && !didPlayerWin)
             {
                 Toast.Instance.ShowToast("You killed all the spiders, you win!");
