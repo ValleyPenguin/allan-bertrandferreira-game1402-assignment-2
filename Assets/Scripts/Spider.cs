@@ -143,16 +143,6 @@ public class Spider : MonoBehaviour
             //startSpiderNavMeshMovement();
 
         }
-        /*else if (spiderStartedWalking)
-        {
-            if (!playerHealth.didPlayerDie)
-            {
-                agent.enabled = true;
-                rb.isKinematic = true;
-                //Debug.Log("Spider started chasing ya!");
-                //agent.SetDestination(playerTarget.position);
-            }
-        }*/
     }
 
     private void OnCollisionEnter(Collision collision)
