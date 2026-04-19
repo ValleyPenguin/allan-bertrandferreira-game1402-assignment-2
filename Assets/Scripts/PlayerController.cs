@@ -243,6 +243,14 @@ public class PlayerController : MonoBehaviour
 
     private void CheckGrounded()
     {
+        /*_isGrounded = Physics.SphereCast(
+            transform.position + groundCheckOffset,
+            groundCheckRadius,
+            Vector3.down,
+            out RaycastHit hit,
+            groundCheckDistance,
+            groundLayer
+        );*/
         _isGrounded = Physics.CheckSphere(transform.position + new Vector3(0f, groundCheckOffset, 0f), groundCheckRadius, groundLayer);
     }
 
@@ -251,4 +259,13 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.purple;
         Gizmos.DrawWireSphere(transform.position + new Vector3(0f, groundCheckOffset, 0f), groundCheckRadius);
     }
+
+    /*void OnDrawGizmos()
+    {
+        Gizmos.color = _isGrounded ? Color.green : Color.red;
+        Gizmos.DrawSphere(transform.position + groundCheckOffset, groundCheckRadius);
+        Gizmos.DrawSphere(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance, groundCheckRadius);
+        Gizmos.DrawCube(transform.position + groundCheckOffset + Vector3.down * groundCheckDistance/2, 
+                    new Vector3(1.5f* groundCheckRadius, groundCheckDistance , 1.5f * groundCheckRadius) );
+    }*/
 }
