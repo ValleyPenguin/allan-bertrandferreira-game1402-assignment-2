@@ -1,5 +1,4 @@
 using UnityEngine;
-using VFolders.Libs;
 
 public class BulletDestroy : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class BulletDestroy : MonoBehaviour
 
     void DestroyBullet()
     {
-        gameObject.Destroy();
+        Destroy(gameObject);
         Debug.Log("Bullet Destroyed!");
     }
 }

@@ -816,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1ef89e8e8c22e4da66b2904ba2e12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnWaves
-  waveNumberOfSpiders: 010000000100000001000000
+  waveNumberOfSpiders: 050000000a0000000f000000
   spiderPrefab: {fileID: 3449153805672933191, guid: cbe2e0f9cf5bc334fb5b390987e4298e, type: 3}
   victoryRoyaleImageObject: {fileID: 589198713}
   minBounds: {x: -62.88, y: 34.6, z: 61.99}
